@@ -3,11 +3,19 @@ version: "3.7"
 services:
     # image project
     app:
+<<<<<<< HEAD
         container_name: especializati-laravel-9
         build:
             context: .
             dockerfile: Dockerfile
         image: especializati/laravel9-app
+=======
+        container_name: especializati-laravel
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: especializati/laravel-app
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -15,7 +23,11 @@ services:
         depends_on: 
             - redis
         networks: 
+<<<<<<< HEAD
             - laravel-9
+=======
+            - laravel
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
     
     # nginx
     nginx:
@@ -28,7 +40,11 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks: 
+<<<<<<< HEAD
             - laravel-9
+=======
+            - laravel
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # db mysql
     mysql:
@@ -45,12 +61,20 @@ services:
         ports: 
             - "3388:3306"
         networks: 
+<<<<<<< HEAD
             - laravel-9
+=======
+            - laravel
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # queue
     queue:
         container_name: especializati-queue
+<<<<<<< HEAD
         image: especializati/laravel9-app
+=======
+        image: especializati/laravel-app
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         restart: unless-stopped
         command: "php artisan queue:work"
         volumes: 
@@ -59,15 +83,26 @@ services:
             - redis
             - app
         networks: 
+<<<<<<< HEAD
             - laravel-9
+=======
+            - laravel
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # redis
     redis:
         container_name: especializati-redis
         image: redis:latest
         networks: 
+<<<<<<< HEAD
             - laravel-9
 
 networks: 
     laravel-9:
+=======
+            - laravel
+
+networks: 
+    laravel:
+>>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         driver: bridge
