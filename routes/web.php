@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\{
+    UserController
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// UserController = Controlador; 'index' = método; name = alias
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/', function () {
     return view('welcome');

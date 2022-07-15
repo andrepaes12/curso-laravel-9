@@ -3,106 +3,71 @@ version: "3.7"
 services:
     # image project
     app:
-<<<<<<< HEAD
         container_name: especializati-laravel-9
         build:
             context: .
             dockerfile: Dockerfile
         image: especializati/laravel9-app
-=======
-        container_name: especializati-laravel
-        build:
-            context: .
-            dockerfile: Dockerfile
-        image: especializati/laravel-app
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./:/var/www
-        depends_on: 
+        depends_on:
             - redis
-        networks: 
-<<<<<<< HEAD
+        networks:
             - laravel-9
-=======
-            - laravel
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
-    
+
     # nginx
     nginx:
         container_name: especializati-nginx
         image: nginx:alpine
         restart: unless-stopped
-        ports: 
+        ports:
             - "8989:80"
-        volumes: 
+        volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
-        networks: 
-<<<<<<< HEAD
+        networks:
             - laravel-9
-=======
-            - laravel
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # db mysql
     mysql:
         container_name: especializati-mysql
         image: mysql:5.7.22
         restart: unless-stopped
-        environment: 
+        environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_USER: ${DB_USERNAME}
-        volumes: 
+        volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
-        ports: 
+        ports:
             - "3388:3306"
-        networks: 
-<<<<<<< HEAD
+        networks:
             - laravel-9
-=======
-            - laravel
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # queue
     queue:
         container_name: especializati-queue
-<<<<<<< HEAD
         image: especializati/laravel9-app
-=======
-        image: especializati/laravel-app
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         restart: unless-stopped
         command: "php artisan queue:work"
-        volumes: 
+        volumes:
             - ./:/var/www
-        depends_on: 
+        depends_on:
             - redis
             - app
-        networks: 
-<<<<<<< HEAD
+        networks:
             - laravel-9
-=======
-            - laravel
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
 
     # redis
     redis:
         container_name: especializati-redis
         image: redis:latest
-        networks: 
-<<<<<<< HEAD
+        networks:
             - laravel-9
 
-networks: 
+networks:
     laravel-9:
-=======
-            - laravel
-
-networks: 
-    laravel:
->>>>>>> 7dc3b5f47b1a9062e75da836fcefea322309e39c
         driver: bridge
